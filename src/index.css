@@ -1,0 +1,66 @@
+@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap');
+
+:root {
+  font-family: 'Outfit', 'Inter', system-ui, -apple-system, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: dark;
+  color: #dbdee1;
+  background-color: #060608;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  --accent-cyan: #00f0ff;
+  --bg-midnight: #060608;
+  --bg-top-navbar: #040506;
+  --bg-sidebar: #08090b;
+}
+
+body {
+  margin: 0;
+  display: flex;
+  min-width: 320px;
+  min-height: 100vh;
+  overflow: hidden;
+  background-color: var(--bg-midnight);
+}
+
+#root {
+  width: 100%;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #1a1b1e;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-cyan);
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.cyan-glow {
+  box-shadow: 0 0 10px rgba(0, 240, 255, 0.2);
+}
+
+.active-nav-link {
+  color: var(--accent-cyan);
+  background-color: rgba(0, 240, 255, 0.1);
+  border-radius: 6px;
+}

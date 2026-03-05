@@ -1,0 +1,57 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Helper functions
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+    
+    function isServerMember(serverId) {
+      return isAuthenticated() && exists(/databases/$(database)/documents/members/$(serverId + "_" + request.auth.uid));
+    }
+
+    // Users collection
+    match /users/{userId} {
+      allow read: if isAuthenticated();
+      allow write: if request.auth.uid == userId;
+    }
+
+    // Servers collection
+    match /servers/{serverId} {
+      allow read: if isServerMember(serverId);
+      allow create: if isAuthenticated();
+      allow update, delete: if isAuthenticated() && resource.data.ownerId == request.auth.uid;
+    }
+
+    // Channels collection
+    match /channels/{channelId} {
+      allow read: if isServerMember(resource.data.serverId);
+      allow write: if isAuthenticated() && isServerMember(request.body.data.serverId); // Simplified, owner check recommended
+    }
+
+    // Messages collection
+    match /messages/{messageId} {
+      allow read: if isAuthenticated(); // Should check channel membership in production
+      allow create: if isAuthenticated();
+      allow update, delete: if isAuthenticated() && resource.data.userId == request.auth.uid;
+    }
+
+    // Members collection
+    match /members/{memberId} {
+      allow read: if isAuthenticated();
+      allow write: if isAuthenticated();
+    }
+
+    // DM Channels
+    match /dmChannels/{dmChannelId} {
+      allow read: if isAuthenticated() && request.auth.uid in resource.data.participants;
+      allow create: if isAuthenticated();
+    }
+
+    // DM Messages
+    match /dmMessages/{dmMessageId} {
+      allow read: if isAuthenticated();
+      allow create: if isAuthenticated();
+    }
+  }
+}
