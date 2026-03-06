@@ -10,9 +10,9 @@ import { ChatInterface } from '../chat/ChatInterface';
 import { MediaRoom } from '../voice/MediaRoom';
 import { ProfileSidebar } from './ProfileSidebar';
 import { TopNavbar } from './TopNavbar';
-import { Search, UserPlus } from 'lucide-react';
 import { ServerSettingsModal } from '../ui/ServerSettingsModal';
 import { UserProfileModal } from '../ui/UserProfileModal';
+import { ZoomWorkspace } from './ZoomWorkspace';
 import { supabase } from '../../lib/supabase';
 import type { UserStatus, ChannelType } from '../../types';
 
@@ -145,41 +145,7 @@ export const MainLayout: React.FC<MainLayoutProps> = ({ user }) => {
                             {activeChannel.type === 'text' && <ProfileSidebar user={user} />}
                         </div>
                     ) : (
-                        <div className="flex-1 flex flex-col items-center justify-center bg-[#060608]">
-                            {/* Friends Header */}
-                            <div className="h-12 w-full border-b border-[#1e1f22] flex items-center px-4 shrink-0 bg-[#060608] justify-between">
-                                <div className="flex items-center gap-2">
-                                    <h2 className="text-white font-bold text-[15px]">Friends</h2>
-                                </div>
-                                <div className="flex items-center gap-4">
-                                    <Search className="w-5 h-5 text-[#949ba4] cursor-pointer hover:text-white transition" />
-                                    <div className="w-[1px] h-6 bg-[#1e1f22]" />
-                                    <button className="bg-[#00f0ff] text-[#040506] text-xs font-black px-4 py-1.5 rounded-lg hover:bg-[#00d0e0] transition cyan-glow uppercase tracking-wider">
-                                        Add Friend
-                                    </button>
-                                </div>
-                            </div>
-
-                            {/* Main Content Area */}
-                            <div className="flex-1 flex flex-col items-center justify-center p-8 text-center">
-                                <div className="w-64 h-64 bg-[#08090b] rounded-full flex items-center justify-center mb-10 border border-[#00f0ff]/10 relative shadow-2xl">
-                                    <div className="absolute inset-0 bg-[#00f0ff]/5 rounded-full blur-3xl" />
-                                    <div className="w-32 h-32 text-[#00f0ff] opacity-40 relative z-10">
-                                        <svg viewBox="0 0 24 24" fill="currentColor" className="w-full h-full">
-                                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z" />
-                                        </svg>
-                                    </div>
-                                </div>
-                                <h1 className="text-4xl font-black text-white mb-3 tracking-tight">Welcome to EduSphere!</h1>
-                                <p className="text-[#949ba4] text-lg mb-8 max-w-sm">
-                                    Wumpus is waiting for friends. Select a guild or start a conversation to begin learning.
-                                </p>
-                                <button className="flex items-center gap-2 bg-[#00f0ff]/10 text-[#00f0ff] px-8 py-3 rounded-full font-bold hover:bg-[#00f0ff]/20 transition border border-[#00f0ff]/30 cyan-glow">
-                                    <UserPlus className="w-5 h-5" />
-                                    Find Your Peers
-                                </button>
-                            </div>
-                        </div>
+                        <ZoomWorkspace />
                     )}
                 </main>
             </div>
